@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import questionsData from "../data/questions.json";
 
 export default function Quiz() {
   const { domain } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
+
+  const queryParams = new URLSearchParams(location.search);
+  const level = queryParams.get("level") || "easy"; 
 
   const [questions, setQuestions] = useState([]);
   const [current, setCurrent] = useState(0);
@@ -12,22 +16,21 @@ export default function Quiz() {
   const [submitted, setSubmitted] = useState(false);
   const [timeLeft, setTimeLeft] = useState(15);
   const [locked, setLocked] = useState({});
-  const [timeUp, setTimeUp] = useState(false); 
+  const [timeUp, setTimeUp] = useState(false);
 
   useEffect(() => {
     const key = domain.toLowerCase();
-    if (questionsData[key]) {
-      setQuestions(questionsData[key]);
+    if (questionsData[key] && questionsData[key][level]) {
+      setQuestions(questionsData[key][level]);
     }
-  }, [domain]);
+  }, [domain, level]);
 
   useEffect(() => {
-    if (submitted) return;
-    if (timeUp) return;
+    if (submitted || timeUp) return;
 
     if (timeLeft === 0) {
       setLocked((prev) => ({ ...prev, [current]: true }));
-      setTimeUp(true); 
+      setTimeUp(true);
 
       setTimeout(() => {
         if (current < questions.length - 1) {
@@ -37,7 +40,7 @@ export default function Quiz() {
         } else {
           handleSubmit();
         }
-      }, 3000); 
+      }, 2000);
       return;
     }
 
@@ -48,7 +51,7 @@ export default function Quiz() {
   const handleNext = () => {
     if (current < questions.length - 1) {
       setCurrent(current + 1);
-      setTimeLeft(5);
+      setTimeLeft(15);
       setTimeUp(false);
     }
   };
@@ -56,7 +59,7 @@ export default function Quiz() {
   const handlePrev = () => {
     if (current > 0) {
       setCurrent(current - 1);
-      setTimeLeft(5);
+      setTimeLeft(15);
       setTimeUp(false);
     }
   };
@@ -79,7 +82,7 @@ export default function Quiz() {
   if (questions.length === 0) {
     return (
       <p className="text-white text-center mt-10">
-        No questions found for {domain}
+        No {level} questions found for {domain}
       </p>
     );
   }
@@ -89,7 +92,9 @@ export default function Quiz() {
     const score = calculateScore();
     return (
       <div className="flex flex-col items-center justify-center min-h-screen text-white px-4 mt-25">
-        <h2 className="text-3xl font-bold mb-4">{domain} Quiz Results</h2>
+        <h2 className="text-3xl font-bold mb-4">
+          {domain} Quiz Results ({level})
+        </h2>
         <p className="text-xl mb-6">
           Your Score: {score} / {questions.length}
         </p>
@@ -132,15 +137,15 @@ export default function Quiz() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen text-white px-4">
       <h2 className="text-2xl font-bold mb-6">
-        {domain} Quiz – Question {current + 1} of {questions.length}
+        {domain} Quiz ({level}) – Question {current + 1} of {questions.length}
       </h2>
 
       {/* Countdown timer / Time up message */}
       <div className="mb-4 text-xl font-bold">
         {timeUp ? (
-          <span className="text-red-500"> Time's Up!</span>
+          <span className="text-red-500">⏳ Time’s Up!</span>
         ) : (
-          <span className="text-red-400"> Time Left: {timeLeft}s</span>
+          <span className="text-green-400">⏱ Time Left: {timeLeft}s</span>
         )}
       </div>
 

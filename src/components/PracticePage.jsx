@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ScrambledText from "./ScrambledText";
+import LevelModal from "./LevelModal"; // 👈 Import popup modal
 
 export default function PracticePage() {
   const navigate = useNavigate();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedDomain, setSelectedDomain] = useState(null);
+
   const domains = [
     "Science",
     "History",
@@ -12,6 +16,16 @@ export default function PracticePage() {
     "Technology",
     "Literature",
   ];
+
+  const handleStartQuiz = (domain) => {
+    setSelectedDomain(domain);
+    setModalOpen(true);
+  };
+
+  const handleConfirmLevel = (level) => {
+    setModalOpen(false);
+    navigate(`/quiz/${selectedDomain.toLowerCase()}?level=${level}`);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-6 py-10">
@@ -35,7 +49,7 @@ export default function PracticePage() {
             <h3 className="text-xl font-semibold mb-3">{domain}</h3>
             <p className="text-sm mb-6">Test your knowledge in {domain}.</p>
             <button
-              onClick={() => navigate(`/quiz/${domain}`)} // 👈 navigate to quiz page
+              onClick={() => handleStartQuiz(domain)}
               className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition"
             >
               Start Quiz
@@ -43,6 +57,12 @@ export default function PracticePage() {
           </div>
         ))}
       </div>
+
+      <LevelModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onConfirm={handleConfirmLevel}
+      />
     </div>
   );
 }
