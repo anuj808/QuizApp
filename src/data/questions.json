@@ -1,0 +1,240 @@
+{
+  "science": [
+    {
+      "id": 1,
+      "question": "What is the chemical symbol for water?",
+      "options": ["O2", "H2O", "CO2", "HO"],
+      "correct": "H2O"
+    },
+    {
+      "id": 2,
+      "question": "Which planet is known as the Red Planet?",
+      "options": ["Venus", "Mars", "Jupiter", "Saturn"],
+      "correct": "Mars"
+    },
+    {
+      "id": 3,
+      "question": "What gas do plants absorb during photosynthesis?",
+      "options": ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"],
+      "correct": "Carbon Dioxide"
+    },
+    {
+      "id": 4,
+      "question": "What is the powerhouse of the cell?",
+      "options": ["Nucleus", "Mitochondria", "Chloroplast", "Ribosome"],
+      "correct": "Mitochondria"
+    },
+    {
+      "id": 5,
+      "question": "Which part of the human body controls balance?",
+      "options": ["Cerebellum", "Lungs", "Heart", "Kidneys"],
+      "correct": "Cerebellum"
+    },
+    {
+      "id": 6,
+      "question": "What is the speed of light?",
+      "options": ["3 × 10^8 m/s", "1.5 × 10^8 m/s", "3 × 10^6 m/s", "9.8 m/s²"],
+      "correct": "3 × 10^8 m/s"
+    }
+  ],
+  "history": [
+    {
+      "id": 1,
+      "question": "Who was the first President of the United States?",
+      "options": ["Abraham Lincoln", "George Washington", "Thomas Jefferson", "John Adams"],
+      "correct": "George Washington"
+    },
+    {
+      "id": 2,
+      "question": "In which year did World War II end?",
+      "options": ["1942", "1945", "1939", "1950"],
+      "correct": "1945"
+    },
+    {
+      "id": 3,
+      "question": "Who was known as the 'Iron Lady'?",
+      "options": ["Margaret Thatcher", "Indira Gandhi", "Angela Merkel", "Golda Meir"],
+      "correct": "Margaret Thatcher"
+    },
+    {
+      "id": 4,
+      "question": "Which empire built the Colosseum?",
+      "options": ["Greek", "Roman", "Ottoman", "Persian"],
+      "correct": "Roman"
+    },
+    {
+      "id": 5,
+      "question": "Who discovered America in 1492?",
+      "options": ["Christopher Columbus", "Marco Polo", "Ferdinand Magellan", "Vasco da Gama"],
+      "correct": "Christopher Columbus"
+    },
+    {
+      "id": 6,
+      "question": "The Great Wall of China was primarily built to protect against which group?",
+      "options": ["Japanese", "Mongols", "Romans", "Persians"],
+      "correct": "Mongols"
+    }
+  ],
+  "math": [
+    {
+      "id": 1,
+      "question": "What is the value of Pi (approx) to two decimal places?",
+      "options": ["3.12", "3.14", "3.15", "3.16"],
+      "correct": "3.14"
+    },
+    {
+      "id": 2,
+      "question": "Solve: 12 × 8 = ?",
+      "options": ["80", "88", "92", "96"],
+      "correct": "96"
+    },
+    {
+      "id": 3,
+      "question": "What is the square root of 144?",
+      "options": ["10", "11", "12", "14"],
+      "correct": "12"
+    },
+    {
+      "id": 4,
+      "question": "If a triangle has angles 90°, 45°, and 45°, what type is it?",
+      "options": ["Scalene", "Isosceles Right", "Equilateral", "Obtuse"],
+      "correct": "Isosceles Right"
+    },
+    {
+      "id": 5,
+      "question": "What is 7 factorial (7!)?",
+      "options": ["720", "5040", "362880", "120"],
+      "correct": "5040"
+    },
+    {
+      "id": 6,
+      "question": "If x = 5, what is 2x² + 3x?",
+      "options": ["55", "65", "75", "85"],
+      "correct": "65"
+    }
+  ],
+  "sports": [
+    {
+      "id": 1,
+      "question": "How many players are there in a soccer team on the field?",
+      "options": ["9", "10", "11", "12"],
+      "correct": "11"
+    },
+    {
+      "id": 2,
+      "question": "Which country has won the most FIFA World Cups?",
+      "options": ["Germany", "Argentina", "Brazil", "Italy"],
+      "correct": "Brazil"
+    },
+    {
+      "id": 3,
+      "question": "In which sport is the term 'love' used?",
+      "options": ["Football", "Tennis", "Basketball", "Hockey"],
+      "correct": "Tennis"
+    },
+    {
+      "id": 4,
+      "question": "How long is a marathon?",
+      "options": ["26.2 miles", "21 miles", "42 miles", "50 km"],
+      "correct": "26.2 miles"
+    },
+    {
+      "id": 5,
+      "question": "Who is known as the 'Fastest Man on Earth'?",
+      "options": ["Michael Phelps", "Usain Bolt", "Carl Lewis", "Tyson Gay"],
+      "correct": "Usain Bolt"
+    },
+    {
+      "id": 6,
+      "question": "Which country hosted the 2016 Summer Olympics?",
+      "options": ["China", "Brazil", "Japan", "Russia"],
+      "correct": "Brazil"
+    }
+  ],
+  "technology": [
+    {
+      "id": 1,
+      "question": "Who is known as the father of computers?",
+      "options": ["Charles Babbage", "Alan Turing", "Bill Gates", "Steve Jobs"],
+      "correct": "Charles Babbage"
+    },
+    {
+      "id": 2,
+      "question": "Which company developed the first iPhone?",
+      "options": ["Google", "Microsoft", "Apple", "Samsung"],
+      "correct": "Apple"
+    },
+    {
+      "id": 3,
+      "question": "What does 'HTTP' stand for?",
+      "options": [
+        "HyperText Transfer Protocol",
+        "HighText Transfer Protocol",
+        "Hyper Transfer Text Process",
+        "Hyper Tool Transfer Protocol"
+      ],
+      "correct": "HyperText Transfer Protocol"
+    },
+    {
+      "id": 4,
+      "question": "Which programming language is primarily used for Android development?",
+      "options": ["Swift", "Java", "C#", "Ruby"],
+      "correct": "Java"
+    },
+    {
+      "id": 5,
+      "question": "What does 'CPU' stand for?",
+      "options": [
+        "Central Processing Unit",
+        "Computer Personal Unit",
+        "Central Program Utility",
+        "Control Processing Unit"
+      ],
+      "correct": "Central Processing Unit"
+    },
+    {
+      "id": 6,
+      "question": "Which company created the Windows operating system?",
+      "options": ["Microsoft", "Apple", "IBM", "Intel"],
+      "correct": "Microsoft"
+    }
+  ],
+  "literature": [
+    {
+      "id": 1,
+      "question": "Who wrote 'Romeo and Juliet'?",
+      "options": ["Charles Dickens", "Mark Twain", "William Shakespeare", "Jane Austen"],
+      "correct": "William Shakespeare"
+    },
+    {
+      "id": 2,
+      "question": "In George Orwell's '1984', what is the name of the totalitarian regime?",
+      "options": ["Big Brother", "The Party", "Oceania", "Ministry of Truth"],
+      "correct": "The Party"
+    },
+    {
+      "id": 3,
+      "question": "Who is the author of 'The Hobbit'?",
+      "options": ["J.R.R. Tolkien", "C.S. Lewis", "George R.R. Martin", "J.K. Rowling"],
+      "correct": "J.R.R. Tolkien"
+    },
+    {
+      "id": 4,
+      "question": "What is the first book of the Bible?",
+      "options": ["Genesis", "Exodus", "Psalms", "Revelation"],
+      "correct": "Genesis"
+    },
+    {
+      "id": 5,
+      "question": "Who wrote 'Pride and Prejudice'?",
+      "options": ["Charlotte Brontë", "Jane Austen", "Mary Shelley", "Emily Brontë"],
+      "correct": "Jane Austen"
+    },
+    {
+      "id": 6,
+      "question": "Which novel begins with the line 'Call me Ishmael'?",
+      "options": ["Moby Dick", "The Old Man and the Sea", "The Odyssey", "Treasure Island"],
+      "correct": "Moby Dick"
+    }
+  ]
+}
