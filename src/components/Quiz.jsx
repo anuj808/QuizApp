@@ -10,23 +10,59 @@ export default function Quiz() {
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(15);
+  const [locked, setLocked] = useState({});
+  const [timeUp, setTimeUp] = useState(false); 
 
   useEffect(() => {
-    const key = domain.toLowerCase(); // normalize domain name
+    const key = domain.toLowerCase();
     if (questionsData[key]) {
       setQuestions(questionsData[key]);
     }
   }, [domain]);
 
+  useEffect(() => {
+    if (submitted) return;
+    if (timeUp) return;
+
+    if (timeLeft === 0) {
+      setLocked((prev) => ({ ...prev, [current]: true }));
+      setTimeUp(true); 
+
+      setTimeout(() => {
+        if (current < questions.length - 1) {
+          setCurrent((prev) => prev + 1);
+          setTimeLeft(15);
+          setTimeUp(false);
+        } else {
+          handleSubmit();
+        }
+      }, 3000); 
+      return;
+    }
+
+    const timer = setTimeout(() => setTimeLeft((t) => t - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [timeLeft, submitted, current, questions.length, timeUp]);
+
   const handleNext = () => {
-    if (current < questions.length - 1) setCurrent(current + 1);
+    if (current < questions.length - 1) {
+      setCurrent(current + 1);
+      setTimeLeft(5);
+      setTimeUp(false);
+    }
   };
 
   const handlePrev = () => {
-    if (current > 0) setCurrent(current - 1);
+    if (current > 0) {
+      setCurrent(current - 1);
+      setTimeLeft(5);
+      setTimeUp(false);
+    }
   };
 
   const handleSelect = (option) => {
+    if (locked[current]) return;
     setSelected({ ...selected, [current]: option });
   };
 
@@ -99,6 +135,15 @@ export default function Quiz() {
         {domain} Quiz – Question {current + 1} of {questions.length}
       </h2>
 
+      {/* Countdown timer / Time up message */}
+      <div className="mb-4 text-xl font-bold">
+        {timeUp ? (
+          <span className="text-red-500"> Time's Up!</span>
+        ) : (
+          <span className="text-red-400"> Time Left: {timeLeft}s</span>
+        )}
+      </div>
+
       <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 max-w-xl w-full shadow-lg border border-white/20">
         <p className="text-lg mb-6">{questions[current].question}</p>
 
@@ -107,11 +152,12 @@ export default function Quiz() {
             <button
               key={idx}
               onClick={() => handleSelect(option)}
+              disabled={locked[current]}
               className={`px-4 py-2 rounded border transition ${
                 selected[current] === option
                   ? "bg-indigo-600 border-indigo-400"
                   : "bg-white/10 hover:bg-indigo-700"
-              }`}
+              } ${locked[current] ? "opacity-50 cursor-not-allowed" : ""}`}
             >
               {option}
             </button>
