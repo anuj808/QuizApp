@@ -1,8 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Renderer, Camera, Geometry, Program, Mesh } from 'ogl';
 
-// import './Particles.css';
-
 const defaultColors = ['#ffffff', '#ffffff', '#ffffff'];
 
 const hexToRgb = hex => {
@@ -32,6 +30,8 @@ const vertex = /* glsl */ `
   uniform float uSpread;
   uniform float uBaseSize;
   uniform float uSizeRandomness;
+  uniform vec2 uMouse;
+  uniform float uHoverFactor;
   
   varying vec4 vRandom;
   varying vec3 vColor;
@@ -42,7 +42,10 @@ const vertex = /* glsl */ `
     
     vec3 pos = position * uSpread;
     pos.z *= 10.0;
-    
+
+    // Add mouse-based displacement
+    pos.xy += uMouse * uHoverFactor * 2.0 * (random.xy - 0.5);
+
     vec4 mPos = modelMatrix * vec4(pos, 1.0);
     float t = uTime;
     mPos.x += sin(t * random.z + 6.28 * random.w) * mix(0.1, 1.5, random.x);
@@ -118,14 +121,13 @@ const Particles = ({
     resize();
 
     const handleMouseMove = e => {
-      const rect = container.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+      const x = (e.clientX / window.innerWidth) * 2 - 1;
+      const y = -(e.clientY / window.innerHeight) * 2 + 1;
       mouseRef.current = { x, y };
     };
 
     if (moveParticlesOnHover) {
-      container.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mousemove', handleMouseMove);
     }
 
     const count = particleCount;
@@ -163,7 +165,9 @@ const Particles = ({
         uSpread: { value: particleSpread },
         uBaseSize: { value: particleBaseSize },
         uSizeRandomness: { value: sizeRandomness },
-        uAlphaParticles: { value: alphaParticles ? 1 : 0 }
+        uAlphaParticles: { value: alphaParticles ? 1 : 0 },
+        uMouse: { value: [0, 0] },
+        uHoverFactor: { value: particleHoverFactor }
       },
       transparent: true,
       depthTest: false
@@ -184,11 +188,9 @@ const Particles = ({
       program.uniforms.uTime.value = elapsed * 0.001;
 
       if (moveParticlesOnHover) {
-        particles.position.x = -mouseRef.current.x * particleHoverFactor;
-        particles.position.y = -mouseRef.current.y * particleHoverFactor;
+        program.uniforms.uMouse.value = [mouseRef.current.x, mouseRef.current.y];
       } else {
-        particles.position.x = 0;
-        particles.position.y = 0;
+        program.uniforms.uMouse.value = [0, 0];
       }
 
       if (!disableRotation) {
@@ -205,7 +207,7 @@ const Particles = ({
     return () => {
       window.removeEventListener('resize', resize);
       if (moveParticlesOnHover) {
-        container.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('mousemove', handleMouseMove);
       }
       cancelAnimationFrame(animationFrameId);
       if (container.contains(gl.canvas)) {

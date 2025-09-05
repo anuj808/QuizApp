@@ -9,7 +9,7 @@ function App() {
     <Router>
       <div className="fixed top-0 left-0 w-full h-full -z-10 bg-black">
         
-<div style={{ width: '100%', height: '600px', position: 'relative' }}>
+<div className="w-full h-full relative">
   <Particles
     particleColors={['#ffffff', '#ffffff']}
     particleCount={200}
